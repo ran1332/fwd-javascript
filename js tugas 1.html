@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Hitung Luas dengan JavaScript</title>
+</head>
+<body>
+  <h2>Perhitungan Luas Bangun Datar</h2>
+  <h3>Muhammad Randya Kurniawan-fdw-STT NF</h3>
+  <div id="output"></div>
+
+  <script>
+    // Fungsi untuk menghitung luas persegi
+    // Parameter: sisi (panjang sisi persegi)
+    function hitungLuasPersegi(sisi) {
+      return sisi * sisi;
+    }
+
+    // Fungsi untuk menghitung luas persegi panjang
+    // Parameter: panjang, lebar
+    function hitungLuasPersegiPanjang(panjang, lebar) {
+      return panjang * lebar;
+    }
+
+    // Fungsi untuk menghitung luas segitiga
+    // Parameter: alas, tinggi
+    function hitungLuasSegitiga(alas, tinggi) {
+      return 0.5 * alas * tinggi;
+    }
+
+    // Pemanggilan fungsi dengan nilai bebas
+    let sisi = 10;
+    let panjang = 10;
+    let lebar = 4;
+    let alas = 6;
+    let tinggi = 8;
+
+    // Tampilkan hasil ke halaman web
+    document.getElementById("output").innerHTML = `
+      Luas Persegi (sisi = ${sisi}) = ${hitungLuasPersegi(sisi)} <br>
+      Luas Persegi Panjang (panjang = ${panjang}, lebar = ${lebar}) = ${hitungLuasPersegiPanjang(panjang, lebar)} <br>
+      Luas Segitiga (alas = ${alas}, tinggi = ${tinggi}) = ${hitungLuasSegitiga(alas, tinggi)} <br>
+    `;
+  </script>
+</body>
+</html>
