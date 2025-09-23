@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistem Manajemen Produk Toko</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f4f4f4; }
+    input { margin: 5px; padding: 5px; }
+    button { margin: 5px; padding: 5px 10px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Manajemen Produk Toko</h1>
+
+  <!-- Tabel daftar produk -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama Produk</th>
+        <th>Harga</th>
+        <th>Stok</th>
+      </tr>
+    </thead>
+    <tbody id="daftarProduk"></tbody>
+  </table>
+
+  <!-- Form tambah produk -->
+  <h2>Tambah Produk</h2>
+  <input type="text" id="nama" placeholder="Nama Produk">
+  <input type="number" id="harga" placeholder="Harga">
+  <input type="number" id="stok" placeholder="Stok">
+  <button onclick="tambahProduk()">Tambah</button>
+
+  <!-- Hapus produk -->
+  <h2>Hapus Produk</h2>
+  <input type="number" id="hapusId" placeholder="ID Produk">
+  <button onclick="hapusProduk()">Hapus</button>
+
+  <script>
+    // Array produk awal
+    let produkToko = [
+      { id: 1, nama: "Laptop", harga: 7000000, stok: 5 },
+      { id: 2, nama: "Mouse", harga: 200000, stok: 10 },
+      { id: 3, nama: "Keyboard", harga: 350000, stok: 7 }
+    ];
+
+    // Tampilkan produk di tabel
+    function tampilkanProduk() {
+      let tbody = document.getElementById("daftarProduk");
+      tbody.innerHTML = ""; // kosongkan tabel dulu
+
+      produkToko.forEach(produk => {
+        let row = `<tr>
+          <td>${produk.id}</td>
+          <td>${produk.nama}</td>
+          <td>Rp${produk.harga.toLocaleString()}</td>
+          <td>${produk.stok}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    // Tambah produk baru
+    function tambahProduk() {
+      let nama = document.getElementById("nama").value;
+      let harga = parseInt(document.getElementById("harga").value);
+      let stok = parseInt(document.getElementById("stok").value);
+
+      if (nama && harga && stok) {
+        let idBaru = produkToko.length > 0 ? produkToko[produkToko.length - 1].id + 1 : 1;
+        produkToko.push({ id: idBaru, nama: nama, harga: harga, stok: stok });
+        tampilkanProduk();
+
+        // reset input
+        document.getElementById("nama").value = "";
+        document.getElementById("harga").value = "";
+        document.getElementById("stok").value = "";
+      } else {
+        alert("Lengkapi semua data produk!");
+      }
+    }
+
+    // Hapus produk berdasarkan ID
+    function hapusProduk() {
+      let id = parseInt(document.getElementById("hapusId").value);
+      let index = produkToko.findIndex(p => p.id === id);
+
+      if (index !== -1) {
+        produkToko.splice(index, 1);
+        tampilkanProduk();
+        document.getElementById("hapusId").value = "";
+      } else {
+        alert("Produk dengan ID " + id + " tidak ditemukan!");
+      }
+    }
+
+    // Panggil pertama kali untuk menampilkan data awal
+    tampilkanProduk();
+  </script>
+</body>
+</html>
