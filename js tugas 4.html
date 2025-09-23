@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistem Manajemen Transportasi</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f4f4f4; }
+    input { margin: 5px; padding: 5px; }
+    button { margin: 5px; padding: 6px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Sistem Manajemen Transportasi</h1>
+
+  <!-- Form input pelanggan -->
+  <h2>Sewa Kendaraan</h2>
+  <input type="text" id="nama" placeholder="Nama Pelanggan">
+  <input type="text" id="telepon" placeholder="Nomor Telepon">
+  <input type="text" id="kendaraan" placeholder="Kendaraan Disewa">
+  <button onclick="tambahPelanggan()">Sewa</button>
+
+  <!-- Tabel daftar pelanggan -->
+  <h2>Daftar Pelanggan yang Menyewa Kendaraan</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Nomor Telepon</th>
+        <th>Kendaraan Disewa</th>
+      </tr>
+    </thead>
+    <tbody id="daftarPelanggan"></tbody>
+  </table>
+
+  <script>
+    // Class Pelanggan
+    class Pelanggan {
+      constructor(nama, nomorTelepon, kendaraanDisewa) {
+        this.nama = nama;
+        this.nomorTelepon = nomorTelepon;
+        this.kendaraanDisewa = kendaraanDisewa;
+      }
+    }
+
+    // Array untuk menyimpan data pelanggan
+    let daftarPelanggan = [
+      new Pelanggan("Andi", "081234567890", "Mobil Avanza"),
+      new Pelanggan("Budi", "081298765432", "Motor NMAX"),
+      new Pelanggan("Citra", "082112223333", "Bus Pariwisata"),
+      new Pelanggan("Dewi", "085678901234", "Mobil Innova"),
+      new Pelanggan("Eka", "087712341234", "Sepeda Listrik")
+    ];
+
+    // Fungsi untuk mencatat penyewaan kendaraan
+    function tambahPelanggan() {
+      let nama = document.getElementById("nama").value;
+      let telepon = document.getElementById("telepon").value;
+      let kendaraan = document.getElementById("kendaraan").value;
+
+      if (nama && telepon && kendaraan) {
+        let pelangganBaru = new Pelanggan(nama, telepon, kendaraan);
+        daftarPelanggan.push(pelangganBaru);
+
+        tampilkanPelanggan();
+
+        // reset input
+        document.getElementById("nama").value = "";
+        document.getElementById("telepon").value = "";
+        document.getElementById("kendaraan").value = "";
+      } else {
+        alert("Harap isi semua data!");
+      }
+    }
+
+    // Fungsi menampilkan daftar pelanggan
+    function tampilkanPelanggan() {
+      let tbody = document.getElementById("daftarPelanggan");
+      tbody.innerHTML = "";
+
+      daftarPelanggan.forEach(p => {
+        let row = `<tr>
+          <td>${p.nama}</td>
+          <td>${p.nomorTelepon}</td>
+          <td>${p.kendaraanDisewa}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    // Tampilkan data awal
+    tampilkanPelanggan();
+  </script>
+</body>
+</html>
