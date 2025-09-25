@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Manajemen Produk Toko</title>
+</head>
+<body>
+  <h2>Manajemen Produk</h2>
+  <button id="btnTampil">Tampilkan Produk</button>
+  <button id="btnTambah">Tambah Produk</button>
+  <button id="btnHapus">Hapus Produk (ID=2)</button>
+
+  <ul id="listProduk"></ul>
+
+  <script>
+    // **Data Produk Awal (minimal 5)**
+    let produkList = [
+      { id: 1, nama: "Laptop", harga: 12000000 },
+      { id: 2, nama: "Smartphone", harga: 5000000 },
+      { id: 3, nama: "Tablet", harga: 7000000 },
+      { id: 4, nama: "Headset", harga: 500000 },
+      { id: 5, nama: "Keyboard", harga: 300000 }
+    ];
+
+    // **Tambah Produk dengan Spread Operator**
+    function tambahProduk(id, nama, harga) {
+      produkList = [...produkList, { id, nama, harga }];
+      alert(`Produk ${nama} berhasil ditambahkan!`);
+    }
+
+    // **Hapus Produk dengan Rest Parameter**
+    function hapusProduk(...id) {
+      produkList = produkList.filter(p => !id.includes(p.id));
+      alert(`Produk dengan ID ${id} berhasil dihapus!`);
+    }
+
+    // **Tampilkan Produk dengan Destructuring**
+    function tampilkanProduk() {
+      const list = document.getElementById("listProduk");
+      list.innerHTML = "";
+      produkList.forEach(({ id, nama, harga }) => {
+        const li = document.createElement("li");
+        li.textContent = `${id}. ${nama} - Rp${harga}`;
+        list.appendChild(li);
+      });
+    }
+
+    // **Event Handler**
+    const eventHandler = {
+      tampil: () => tampilkanProduk(),
+      tambah: () => tambahProduk(6, "Smartwatch", 2500000),
+      hapus: () => hapusProduk(2)
+    };
+
+    // **Event Listener**
+    document.getElementById("btnTampil").addEventListener("click", eventHandler.tampil);
+    document.getElementById("btnTambah").addEventListener("click", eventHandler.tambah);
+    document.getElementById("btnHapus").addEventListener("click", eventHandler.hapus);
+
+    // tampilkan produk pertama kali
+    tampilkanProduk();
+  </script>
+</body>
+</html>
