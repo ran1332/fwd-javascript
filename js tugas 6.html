@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Users - ES6 Module Simulasi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f0f0f0;
+    }
+    h1 {
+      color: #333;
+    }
+    .user-card {
+      background: white;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .add { background: #4caf50; color: white; }
+    .delete { background: #f44336; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Daftar Users</h1>
+  <div id="users"></div>
+
+  <button class="add" onclick="tambahData()">Tambah 2 Data</button>
+  <button class="delete" onclick="hapusData()">Hapus Data Terakhir</button>
+
+  <script>
+    // Data awal 10 users
+    let users = [
+      { namaSeseorang: 'Andi', umur: 20, alamat: 'Jl. Melati 1', email: 'andi@mail.com' },
+      { namaSeseorang: 'Budi', umur: 21, alamat: 'Jl. Mawar 2', email: 'budi@mail.com' },
+      { namaSeseorang: 'Citra', umur: 22, alamat: 'Jl. Anggrek 3', email: 'citra@mail.com' },
+      { namaSeseorang: 'Dewi', umur: 23, alamat: 'Jl. Kenanga 4', email: 'dewi@mail.com' },
+      { namaSeseorang: 'Eko', umur: 24, alamat: 'Jl. Melur 5', email: 'eko@mail.com' },
+      { namaSeseorang: 'Fajar', umur: 25, alamat: 'Jl. Cendana 6', email: 'fajar@mail.com' },
+      { namaSeseorang: 'Gina', umur: 26, alamat: 'Jl. Dahlia 7', email: 'gina@mail.com' },
+      { namaSeseorang: 'Hendra', umur: 27, alamat: 'Jl. Flamboyan 8', email: 'hendra@mail.com' },
+      { namaSeseorang: 'Indah', umur: 28, alamat: 'Jl. Kamboja 9', email: 'indah@mail.com' },
+      { namaSeseorang: 'Joko', umur: 29, alamat: 'Jl. Teratai 10', email: 'joko@mail.com' }
+    ];
+
+    // Fungsi tampilkan data
+    const index = () => {
+      const container = document.getElementById("users");
+      container.innerHTML = "";
+      users.map((u, i) => {
+        container.innerHTML += `
+          <div class="user-card">
+            <strong>${i + 1}. ${u.namaSeseorang}</strong><br>
+            Umur: ${u.umur} <br>
+            Alamat: ${u.alamat} <br>
+            Email: ${u.email}
+          </div>
+        `;
+      });
+    };
+
+    // Fungsi tambah data
+    const store = (user) => {
+      users.push(user);
+    };
+
+    // Fungsi hapus data terakhir
+    const destroy = () => {
+      if (users.length > 0) {
+        users.pop();
+      }
+    };
+
+    // Tambah 2 data baru
+    const tambahData = () => {
+      store({ namaSeseorang: 'Kevin', umur: 30, alamat: 'Jl. Angsana 11', email: 'kevin@mail.com' });
+      store({ namaSeseorang: 'Lina', umur: 31, alamat: 'Jl. Pinus 12', email: 'lina@mail.com' });
+      index();
+    };
+
+    // Hapus data terakhir
+    const hapusData = () => {
+      destroy();
+      index();
+    };
+
+    // Pertama kali load tampilkan data
+    index();
+  </script>
+</body>
+</html>
